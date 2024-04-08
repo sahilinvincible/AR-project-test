@@ -758,14 +758,25 @@ public class ObjectSpawnerCustom : MonoBehaviour
     }
 }
 
+    IEnumerator GetProductAnnotations(string url)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
 
-
-
-
-
-
-
-
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"Error: {request.error}");
+            }
+            else
+            {
+                Debug.Log("Api is hit");
+                string jsonResponse = request.downloadHandler.text;
+                Debug.Log($"Response: {jsonResponse}");
+                ProcessAnnotations(jsonResponse);
+            }
+        }
+    }
 
 
 
