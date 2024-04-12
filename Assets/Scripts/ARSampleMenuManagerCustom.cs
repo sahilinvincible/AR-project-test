@@ -412,7 +412,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
             if (m_ObjectSpawner.objectPrefabs.Count > objectIndex)
             {
                 m_ObjectSpawner.spawnOptionIndex = objectIndex;
-                Debug.Log(" new SPAWN OBJ index is BEING  SET ");
+                Debug.Log(" new SPAWN OBJ index is BEING  SET " + objectIndex + m_ObjectSpawner.spawnOptionIndex);
             }
             else
             {
