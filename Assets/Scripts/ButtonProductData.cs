@@ -6,5 +6,9 @@ public class ButtonProductData : MonoBehaviour
 {
 
     public AllProducts allProducts;
+    public ButtonProductData(AllProducts allProducts)
+    {
+        this.allProducts = allProducts;
+    }
 
 }

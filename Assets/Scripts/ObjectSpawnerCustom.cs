@@ -440,9 +440,9 @@ public class AnnotationArray
 }
 
 [System.Serializable]
-public class AllProducts 
+public class AllProducts
 {
- 
+
     public string _id;
     public string user;
     public string name;
@@ -451,6 +451,7 @@ public class AllProducts
     public string modelFile;
 
 }
+
 
 [System.Serializable]
 public class ProductsArray
@@ -676,8 +677,11 @@ public class ObjectSpawnerCustom : MonoBehaviour
     public GameObject prefabContainer;
     public GameObject menuButtonPrefabContainer;
     public GameObject uiMenuContent;
-
-    ARSampleMenuManagerCustom menuManager;
+    public GameObject baseModel;
+    public ARSampleMenuManagerCustom menuManager;
+    [SerializeField]
+    private List<GameObject> datalist;
+    public GameObject spawnObjectdata;
 
     public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
     {
@@ -695,7 +699,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             }
         }
 
-        if (newObject != null) { Debug.Log(newObject.transform.position + " transPos"); }
+        // if (newObject != null) { Debug.Log(newObject.transform.position + " transPos"); }
 
         if (newObject == null || objectIndex != m_SpawnOptionIndex)
         {
@@ -713,17 +717,47 @@ public class ObjectSpawnerCustom : MonoBehaviour
                 objectIndex = -1;
                 objectIndex = isSpawnOptionRandomized ? UnityEngine.Random.Range(0, m_ObjectPrefabs.Count) : m_SpawnOptionIndex;
 
-                newObject = Instantiate(m_ObjectPrefabs[objectIndex]);
-                var data = newObject.GetComponent<ButtonProductData>();
-                AllProducts allProductsData = data.allProducts;
-                string modelFilePath = allProductsData.modelFile;
-                StartCoroutine(DownloadModelCoroutine( "http://192.168.0.124:3001" + modelFilePath  , newObject));
+                //  newObject = Instantiate(m_ObjectPrefabs[objectIndex]);
+                newObject = Instantiate(baseModel);
+                // AddBoundingBox(newObject);
+                ButtonProductData Prefabdata = m_ObjectPrefabs[objectIndex].GetComponent<ButtonProductData>();
+                ButtonProductData objData = newObject.GetComponent<ButtonProductData>();
+                objData = GetButtonProductDataAtIndex(objectIndex);
+                //     GameObject buttonData = spawnObjectdata;
 
-                if (newObject != null)
-                {
-                    Debug.Log("IS TRANSparency called /");
-                    ChangeTransparency(newObject, alphaValue);
-                }
+                //  objData = GetButtonProductDataButton(buttonData);
+
+                // AllProducts allProductsData = data.allProducts;
+                // string modelFilePath = Prefabdata.allProducts.modelFile;
+                string modelFilePath = objData.allProducts.modelFile;
+                //   Debug.Log("modelFile" + buttonData.allProducts.modelFile);
+                //   AllProducts allProductsData = Prefabdata.allProducts;
+
+                // Get the modelFile value
+                //   string modelFilePath = allProductsData.modelFile;
+
+                /*ButtonProductData buttonData = prefabcontainer.GetComponent<ButtonProductData>();
+                buttonData.allProducts = data.AllProducts;
+
+
+
+                ButtonProductData buttonData1 = button.GetComponent<ButtonProductData>();
+                Debug.Log(buttonData1.name + " button name");
+                buttonData1.allProducts = AllProducts;
+
+                string modelFilePath = allProductsData.modelFile;*/
+                Debug.Log(modelFilePath + " modelfilepath");
+                string url = "http://192.168.0.124:3001" + modelFilePath;
+                Debug.Log("url " + url);
+                //   StartCoroutine(DownloadModelCoroutine( "http://192.168.0.124:3001/uploads/modelFile-1712049595230-836896281.glb" , newObject)); // iphone
+                //  StartCoroutine(DownloadModelCoroutine("http://192.168.0.124:3001/uploads/modelFile-1712394564440-436215008.glb", newObject)); // watch 
+                StartCoroutine(DownloadModelCoroutine(url, newObject)); // watch 
+
+                /*  if (newObject != null)
+                  {
+                      Debug.Log("IS TRANSparency called /");
+                      ChangeTransparency(newObject, alphaValue);
+                  }*/
                 letTranslate = true;
             }
         }
@@ -783,6 +817,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             SpawnedObject.transform.position = newObject.transform.position;
             SpawnedObject.transform.rotation = newObject.transform.rotation;
             Destroy(newObject);
+            Debug.Log(" newobject destroyed");
             newObject = SpawnedObject;
             Debug.Log(newObject.transform.position + " pos before");
             letTranslate = false;
@@ -815,33 +850,33 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
    */
 
-    IEnumerator SpawnAndRotateObjects()
-    {
-        foreach (Vector3 point in points)
+    /*    IEnumerator SpawnAndRotateObjects()
         {
-            if (currentObject != null)
+            foreach (Vector3 point in points)
             {
-                Destroy(currentObject); // Optionally destroy the previous object.
+                if (currentObject != null)
+                {
+                    Destroy(currentObject); // Optionally destroy the previous object.
+                }
+
+                // Instantiate a new object at the current point.
+                currentObject = Instantiate(prefab, point, Quaternion.identity);
+
+                // Start rotating the newly instantiated object.
+                yield return StartCoroutine(RotateObject(currentObject, Quaternion.Euler(targetEulerAngles), animationDuration));
             }
-
-            // Instantiate a new object at the current point.
-            currentObject = Instantiate(prefab, point, Quaternion.identity);
-
-            // Start rotating the newly instantiated object.
-            yield return StartCoroutine(RotateObject(currentObject, Quaternion.Euler(targetEulerAngles), animationDuration));
         }
-    }
 
-    IEnumerator RotateObject(GameObject obj, Quaternion endRotation, float duration)
-    {
-        Quaternion startRotation = obj.transform.rotation;
-        for (float t = 0; t < 1.0f; t += Time.deltaTime / duration)
+        IEnumerator RotateObject(GameObject obj, Quaternion endRotation, float duration)
         {
-            obj.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
-            yield return null;
-        }
-        obj.transform.rotation = endRotation;
-    }
+            Quaternion startRotation = obj.transform.rotation;
+            for (float t = 0; t < 1.0f; t += Time.deltaTime / duration)
+            {
+                obj.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+                yield return null;
+            }
+            obj.transform.rotation = endRotation;
+        }*/
 
 
     IEnumerator GetProducts(string url)
@@ -864,6 +899,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
         }
     }
     public GameObject addedcube;
+
     void ProcessProducts(string jsonResponse)
     {
         Debug.Log("iscalled");
@@ -872,35 +908,41 @@ public class ObjectSpawnerCustom : MonoBehaviour
         Debug.Log("now?");
         // AnnotationsList.Clear();
 
+        int currentIndex = 0;
         foreach (var AllProducts in productsArray.items)
         {
-            int currentIndex = 0;
+
+            int objectIndex = currentIndex;
             Debug.Log("is added ?");
             AllProductsList.Add(AllProducts);
 
-            var prefabcontainer = Instantiate(prefabContainer, Vector3.zero, Quaternion.identity); // check spelling of prefab conatainer . changed it 
+            GameObject prefabcontainer = Instantiate(prefabContainer, Vector3.zero, Quaternion.identity); // check spelling of prefab conatainer . changed it 
             objectPrefabs.Add(prefabContainer);
+            // datalist.Add(prefabcontainer);
 
             ButtonProductData buttonData = prefabcontainer.GetComponent<ButtonProductData>();
             buttonData.allProducts = AllProducts;
+            Debug.Log("modelFile" + buttonData.allProducts.modelFile);
 
-           
 
             var button = Instantiate(menuButtonPrefabContainer, Vector3.zero, Quaternion.identity);
             button.transform.SetParent(uiMenuContent.transform, false);
+            datalist.Add(button);
             ButtonProductData buttonData1 = button.GetComponent<ButtonProductData>();
             Debug.Log(buttonData1.name + " button name");
             buttonData1.allProducts = AllProducts;
+            button.name = buttonData1.allProducts.name;
             UnityEngine.UI.Button buttonClick = button.transform.GetComponent<UnityEngine.UI.Button>();
-
+            Debug.Log(currentIndex + "currentInndex");
             // Add a click event listener to each button
-            buttonClick.onClick.AddListener(() => menuManager.SetObjectToSpawn(currentIndex));
+            buttonClick.onClick.AddListener(() => menuManager.SetObjectToSpawn(objectIndex));
+            buttonClick.onClick.AddListener(() => menuManager.SetObjectToSpawnObj(button));
             currentIndex++;
 
             Transform objectIconTransform = button.transform.GetChild(0);
             GameObject objectIcon = objectIconTransform.gameObject;
             Debug.Log("images" + AllProducts.images);
-          
+
             if (AllProducts.images != null && AllProducts.images.Count > 0)
             {
                 string imageUrl = "http://192.168.0.124:3001" + AllProducts.images[0]; // Use the first image in the list
@@ -908,7 +950,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             }
         }
 
-        
+
 
     }
 
@@ -918,6 +960,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
+            Debug.Log(url + " url is  calleed");
             yield return webRequest.SendWebRequest();
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
@@ -929,31 +972,39 @@ public class ObjectSpawnerCustom : MonoBehaviour
                 string modelName = Path.GetFileName(url);
                 string savePath = Path.Combine(Application.persistentDataPath, modelName);
 
-                //     if (!System.IO.File.Exists(savePath)) {  // to check if file exits 
+                //    if (!System.IO.File.Exists(savePath))
+                //   {  // to check if file exits 
                 System.IO.File.WriteAllBytes(savePath, webRequest.downloadHandler.data);
                 savedModelPaths.Add(savePath);
                 Debug.Log($"Model saved to: {savePath}");
                 //   }
 
                 var addModelTask = AddDownloadedModelToPrefabsAsync(savePath, go);
+                // if (go != null)
+                //   {
+                //  Debug.Log("IS TRANSparency called /");
+                // ChangeTransparency(go, alphaValue);
+                //  }
 
                 // Wait for the async operation to complete
                 yield return new WaitUntil(() => addModelTask.IsCompleted);
+                ChangeTransparency(go, alphaValue);
             }
 
         }
     }
     public async Task AddDownloadedModelToPrefabsAsync(string modelPath, GameObject parentprefab)
     {
+        Debug.Log("modelpath  loading from is" + modelPath);
 
-        var gltf = new GLTFast.GltfImport();
+        //  var gltf = new GLTFast.GltfImport();
+        var gltf = new GltfImport();
         // Load the GLB file asynchronously
         if (await gltf.Load(modelPath))
         {
-
-               gltf.InstantiateMainScene(parentprefab.transform);
-           // await gltf.InstantiateMainSceneAsync(parentprefab.transform);
-
+            //    gltf.InstantiateMainScene(parentprefab.transform);
+            await gltf.InstantiateMainSceneAsync(parentprefab.transform);
+            AddBoundingBox(parentprefab);
 
         }
         else
@@ -992,6 +1043,144 @@ public class ObjectSpawnerCustom : MonoBehaviour
                     Debug.LogError("No Image component found on buttonGameObject.");
                 }
             }
+        }
+    }
+
+    private Bounds combinedBounds;
+
+    public void AddBoundingBox(GameObject model)
+    {
+        /* Debug.Log(" bounding box called");
+         Renderer[] childRenderers = model.GetComponentsInChildren<Renderer>();
+         Bounds combinedBounds = new Bounds(model.transform.position, Vector3.zero);
+
+         foreach (Renderer childRenderer in childRenderers)
+         {
+             Bounds childBounds = childRenderer.bounds;
+             combinedBounds.Encapsulate(childBounds.min);
+             combinedBounds.Encapsulate(childBounds.max);
+         }
+
+
+
+         BoxCollider boxCollider = model.AddComponent<BoxCollider>();
+         boxCollider.center = combinedBounds.center;
+
+         boxCollider.size = combinedBounds.size;*/
+        // boxCollider.transform.position = model.transform.position;
+        // OnDrawGizmos(combinedBounds);
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0)
+        {
+            Debug.LogError("No Renderer components found on the GameObject or its children.");
+            return;
+        }
+
+        Bounds combinedBounds = new Bounds(transform.position, Vector3.zero); // Initialize with a valid position
+        foreach (Renderer renderer in renderers)
+        {
+            combinedBounds.Encapsulate(renderer.bounds);
+        }
+
+        BoxCollider boxCollider = model.AddComponent<BoxCollider>();
+        boxCollider.center = combinedBounds.center;
+
+        boxCollider.size = combinedBounds.size;
+        Debug.Log($"Combined Bounds Center: {combinedBounds.center}, Combined Bounds Size: {combinedBounds.size}");
+        // Optionally, you can visualize the bounds
+        //  ShowBounds(combinedBounds);
+
+
+
+    }
+
+    public ButtonProductData GetButtonProductDataAtIndex(int index)
+    {
+        if (index >= 0 && index < datalist.Count)
+        {
+            ButtonProductData data = datalist[index].GetComponent<ButtonProductData>();
+            if (data != null)
+            {
+                // Here you can use or return the data
+                return data;
+            }
+            else
+            {
+                Debug.LogError("ButtonProductData component not found on the object at index " + index);
+            }
+        }
+        else
+        {
+            Debug.LogError("Index " + index + " is out of range.");
+        }
+        return null;
+    }
+
+
+    public ButtonProductData GetButtonProductDataButton(GameObject button)
+    {
+
+        ButtonProductData data = button.GetComponent<ButtonProductData>();
+        if (data != null)
+        {
+            // Here you can use or return the data
+            return data;
+        }
+        else
+        {
+            Debug.LogError("ButtonProductData component not found on the object at index ");
+        }
+
+        return null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = UnityEngine.Color.red;
+        Gizmos.DrawWireCube(combinedBounds.center, combinedBounds.size);
+    }
+
+
+    IEnumerator GetProductAnnotations(string url)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"Error: {request.error}");
+            }
+            else
+            {
+                Debug.Log("Api is hit");
+                string jsonResponse = request.downloadHandler.text;
+                Debug.Log($"Response: {jsonResponse}");
+                ProcessAnnotations(jsonResponse);
+            }
+        }
+    }
+
+    void ProcessAnnotations(string jsonResponse)
+    {
+
+        string jsonToParse = $"{{\"items\":{jsonResponse}}}";
+        AnnotationArray annotationArray = JsonUtility.FromJson<AnnotationArray>(jsonToParse);
+
+
+        // AnnotationsList.Clear();
+        foreach (var annotation in annotationArray.items)
+        {
+            AnnotationsList.Add(annotation);
+            //   Debug.Log($"Annotation ID: {annotation.annotationID}, Title: {annotation.title}");
+            //  Debug.Log($"Position - X: {annotation.position.x}, Y: {annotation.position.y}, Z: {annotation.position.z}");
+        }
+
+        foreach (var annotation in AnnotationsList)
+        {
+            Instantiate(prefab, annotation.position, Quaternion.identity);
+            Debug.Log("pos " + annotation.position + "title " + annotation.title + "Desc" + annotation.description);
+
         }
     }
 

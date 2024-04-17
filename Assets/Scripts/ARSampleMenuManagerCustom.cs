@@ -412,17 +412,35 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
             if (m_ObjectSpawner.objectPrefabs.Count > objectIndex)
             {
                 m_ObjectSpawner.spawnOptionIndex = objectIndex;
-                Debug.Log(" new SPAWN OBJ index is BEING  SET " + objectIndex + m_ObjectSpawner.spawnOptionIndex);
+                Debug.Log(" new SPAWN OBJ index is BEING  SET " + objectIndex + " ---" +  m_ObjectSpawner.spawnOptionIndex);
             }
             else
             {
-                Debug.LogWarning("Object Spawner not configured correctly: object index larger than number of Object Prefabs.");
+                Debug.Log(objectIndex);
+                Debug.LogWarning("Object Spawner not configured correctly: object index larger than number of Object Prefabs." + m_ObjectSpawner.objectPrefabs.Count + objectIndex);
             }
         }
 
         HideMenu();
     }
 
+    public void SetObjectToSpawnObj(GameObject obj)
+    {
+        if (m_ObjectSpawner == null)
+        {
+            Debug.LogWarning("Object Spawner not configured correctly: no ObjectSpawner set.");
+        }
+        else
+        {
+          
+                m_ObjectSpawner.spawnObjectdata = obj;
+                Debug.Log(" new SPAWN OBJ index is BEING  SET " + obj  + " ---" + m_ObjectSpawner.spawnOptionIndex);
+        
+           
+        }
+
+        HideMenu();
+    }
     void ShowMenu()
     {
         m_ShowObjectMenu = true;
