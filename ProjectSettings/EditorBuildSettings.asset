@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/2.5.3/AR Starter Assets/ARDemoScene.unity
     guid: da4db6c21a88243878fecfe160c1be3b
-  - enabled: 1
+  - enabled: 0
     path: Assets/CustomTestScene.unity
     guid: d8f3f3b86b5a8074cb3834ae06bb604c
   - enabled: 0
@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/CTest2.unity
     guid: 47f017ab382176a4babc7265a7d55ab0
+  - enabled: 1
+    path: Assets/CustomTestScene 1.unity
+    guid: fcd4fe7d631a4534f9371778e30ec51d
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}

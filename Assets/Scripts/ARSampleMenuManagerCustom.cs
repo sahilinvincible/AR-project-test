@@ -424,7 +424,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         HideMenu();
     }
 
-    public void SetObjectToSpawnObj(GameObject obj)
+    public void SetObjectToSpawnObj3(GameObject obj)
     {
         if (m_ObjectSpawner == null)
         {
