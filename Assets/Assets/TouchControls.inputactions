@@ -1,0 +1,34 @@
+{
+    "name": "TouchControls",
+    "maps": [
+        {
+            "name": "control",
+            "id": "c54dd55f-d3fa-41bb-8a48-d9464460b417",
+            "actions": [
+                {
+                    "name": "touch",
+                    "type": "Value",
+                    "id": "1eab6a12-c32d-4748-a345-2dc4443b85bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d3fd5bc4-7593-49de-92d8-f18a96558bfa",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
