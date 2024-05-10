@@ -359,7 +359,10 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         m_ScreenSpaceController.tapStartPositionAction.action.started += HideTapOutsideUI;
         m_CreateButton.onClick.AddListener(ShowMenu);
         m_CancelButton.onClick.AddListener(HideMenu);
+<<<<<<< HEAD
         m_CancelButton.onClick.AddListener(ShowAnMenu);
+=======
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         m_DeleteButton.onClick.AddListener(DeleteFocusedObject);
     }
 
@@ -378,8 +381,11 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         HideMenu();
     }
 
+<<<<<<< HEAD
     public GameObject annotatiosnButtonMenu; 
 
+=======
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     void Update()
     {
         if (m_ShowObjectMenu)
@@ -435,6 +441,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
                 m_ObjectSpawner.spawnObjectdata = obj;
                 Debug.Log(" new SPAWN OBJ index is BEING  SET " + obj  + " ---" + m_ObjectSpawner.spawnOptionIndex);
         }
@@ -445,6 +452,19 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
     void ShowMenu()
     {
         annotatiosnButtonMenu.SetActive(false);
+=======
+          
+                m_ObjectSpawner.spawnObjectdata = obj;
+                Debug.Log(" new SPAWN OBJ index is BEING  SET " + obj  + " ---" + m_ObjectSpawner.spawnOptionIndex);
+        
+           
+        }
+
+        HideMenu();
+    }
+    void ShowMenu()
+    {
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         m_ShowObjectMenu = true;
         m_ObjectMenu.SetActive(true);
         if (!m_ObjectMenuAnimator.GetBool("Show"))
@@ -462,10 +482,13 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         m_ShowObjectMenu = false;
     }
 
+<<<<<<< HEAD
     public void ShowAnMenu()
     {
         annotatiosnButtonMenu.SetActive(true);
     }
+=======
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     void HideTapOutsideUI(InputAction.CallbackContext context)
     {
         if (!m_IsPointerOverUI)

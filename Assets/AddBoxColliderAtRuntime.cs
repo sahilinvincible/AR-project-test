@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
+<<<<<<< HEAD
 //using static Unity.VisualScripting.AnnotationUtility;
+=======
+using static Unity.VisualScripting.AnnotationUtility;
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 using System.Threading.Tasks;
 using UnityEngine.XR.Interaction.Toolkit.Utilities;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -431,7 +435,11 @@ public class AddBoxColliderAtRuntime : MonoBehaviour
     }
     private Vector3 point1;
   
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     void OnDrawGizmos()
     {
         Vector3 pointOnCube = currentObject.transform.position; // the point on the cube's surface
@@ -449,7 +457,11 @@ public class AddBoxColliderAtRuntime : MonoBehaviour
 
         Gizmos.DrawLine(tryy.transform.position, Camera.main.transform.position);
     }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
     // work parially decent need to complete the logic;
     /*   IEnumerator RotateObject(GameObject obj, Vector3 point, Camera camera, float duration)
