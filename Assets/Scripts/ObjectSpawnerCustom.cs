@@ -291,21 +291,14 @@ public class ObjectSpawnerCustom : MonoBehaviour
     public ARSampleMenuManagerCustom menuManager;
     [SerializeField]
     private List<GameObject> datalist;
-<<<<<<< HEAD
     
     [SerializeField]
-=======
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     private List<GameObject> annotationButtonList;
     public GameObject spawnObjectdata;
     private string baseUrl = "http://192.168.0.124:3001";
     // private string baseUrl =  "https://three-js-dashboard.onrender.com";
     public GameObject uiAnnotationContent;
-<<<<<<< HEAD
     public GameObject annotationsButtonPanel;
-=======
-
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
     private void Start()
     {
@@ -336,11 +329,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
         {
             if (newObject != null)
             {
-<<<<<<< HEAD
               //  Debug.Log("not null ");
-=======
-                Debug.Log("not null ");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 Destroy(newObject);
                 Destroy(SpawnedObject);
                 objectIndex = -1;
@@ -386,26 +375,16 @@ public class ObjectSpawnerCustom : MonoBehaviour
                 //  Debug.Log(modelFilePath + " modelfilepath");
                 //     string url = "http://192.168.0.159:3001" + modelFilePath;
                 string url = baseUrl + modelFilePath;
-<<<<<<< HEAD
                // Debug.Log("url " + url);
-=======
-                Debug.Log("url " + url);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 //   StartCoroutine(DownloadModelCoroutine( "http://192.168.0.124:3001/uploads/modelFile-1712049595230-836896281.glb" , newObject)); // iphone
                 //  StartCoroutine(DownloadModelCoroutine("http://192.168.0.124:3001/uploads/modelFile-1712394564440-436215008.glb", newObject)); // watch 
                 StartCoroutine(DownloadModelCoroutine(url, newObject)); // watch 
                 string annotationUrl = baseUrl + "/api/products/" + productId + "/annotations";
                 // string annotationUrl = "http://192.168.0.159:3001/api/products/661112256378f1ef89a88790/annotations";
-<<<<<<< HEAD
                 //  string annotationUrl = baseUrl + "/api/products/661111456378f1ef89a88754/annotations"; // for Watch
                
                 StartCoroutine(GetProductAnnotations(annotationUrl)); //http://192.168.0.159/
                // Debug.Log("Annotation url " + annotationUrl);
-=======
-              //  string annotationUrl = baseUrl + "/api/products/661111456378f1ef89a88754/annotations"; // for Watch
-                StartCoroutine(GetProductAnnotations(annotationUrl)); //http://192.168.0.159/
-                Debug.Log("Annotation url " + annotationUrl);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
                 /*  if (newObject != null)
                   {
@@ -426,7 +405,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
             newObject.transform.parent = transform;
         }
 
-<<<<<<< HEAD
         Debug.Log("is called to look at camera ");
         // EnsureFacingmera();
        // var facePosition = m_CameraToFace.transform.position;
@@ -434,14 +412,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
       //  BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
         //newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
-=======
-        // EnsureFacingmera();
-        var facePosition = m_CameraToFace.transform.position;
-        var forward = facePosition - spawnPoint;
-
-        BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
 
 
@@ -468,11 +438,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
         {
             renderer.material = previewMaterial;
         }
-<<<<<<< HEAD
        // Debug.Log("yes called transparency");
-=======
-        Debug.Log("yes called transparency");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     }
 
     public void SpawnObject()
@@ -487,17 +453,11 @@ public class ObjectSpawnerCustom : MonoBehaviour
             SpawnedObject.transform.position = newObject.transform.position;
             SpawnedObject.transform.rotation = newObject.transform.rotation;
             Destroy(newObject);
-<<<<<<< HEAD
          //   Debug.Log(" newobject destroyed");
             newObject = SpawnedObject;
             annotationsButtonPanel.gameObject.SetActive(true);
 
          //   Debug.Log(newObject.transform.position + " pos before");
-=======
-            Debug.Log(" newobject destroyed");
-            newObject = SpawnedObject;
-            Debug.Log(newObject.transform.position + " pos before");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             letTranslate = false;
             // StartCoroutine(Rotateobjects()); // JUS ADDED 
             //  StartCoroutine(SpawnAndRotateObjects());
@@ -518,7 +478,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
-<<<<<<< HEAD
                // Debug.LogError($"Error: {request.error}");
             }
             else
@@ -526,15 +485,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
                // Debug.Log("Api is hit");
                 string jsonResponse = request.downloadHandler.text;
              //   Debug.Log($"Response: {jsonResponse}");
-=======
-                Debug.LogError($"Error: {request.error}");
-            }
-            else
-            {
-                Debug.Log("Api is hit");
-                string jsonResponse = request.downloadHandler.text;
-                Debug.Log($"Response: {jsonResponse}");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 ProcessProducts(jsonResponse);
             }
         }
@@ -543,17 +493,10 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
     void ProcessProducts(string jsonResponse)
     {
-<<<<<<< HEAD
     //    Debug.Log("iscalled");
         string jsonToParse = $"{{\"items\":{jsonResponse}}}";
         ProductsArray productsArray = JsonUtility.FromJson<ProductsArray>(jsonToParse);
       //  Debug.Log("now?");
-=======
-        Debug.Log("iscalled");
-        string jsonToParse = $"{{\"items\":{jsonResponse}}}";
-        ProductsArray productsArray = JsonUtility.FromJson<ProductsArray>(jsonToParse);
-        Debug.Log("now?");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         // AnnotationsList.Clear();
 
         int currentIndex = 0;
@@ -580,11 +523,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             objectPrefabs.Add(button);
 
             ButtonProductData buttonData1 = button.GetComponent<ButtonProductData>();
-<<<<<<< HEAD
          //   Debug.Log(buttonData1.name + " button name");
-=======
-            Debug.Log(buttonData1.name + " button name");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             buttonData1.allProducts = AllProducts;
             button.name = buttonData1.allProducts.name;
             UnityEngine.UI.Button buttonClick = button.transform.GetComponent<UnityEngine.UI.Button>();
@@ -602,11 +541,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             {
                 // string imageUrl = "http://192.168.0.159:3001" + AllProducts.images[0]; // Use the first image in the list
                 string imageUrl = baseUrl + AllProducts.images[0]; // Use the first image in the list
-<<<<<<< HEAD
               //  Debug.Log("IMAGEURL " + imageUrl);
-=======
-                Debug.Log("IMAGEURL " + imageUrl);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 StartCoroutine(DownloadImage(imageUrl, objectIcon)); //http://192.168.0.159/
 
             }
@@ -624,11 +559,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
-<<<<<<< HEAD
          //   Debug.Log(url + " url is  calleed");
-=======
-            Debug.Log(url + " url is  calleed");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             yield return webRequest.SendWebRequest();
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
@@ -643,11 +574,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
                 {  // to check if file exits 
                     System.IO.File.WriteAllBytes(savePath, webRequest.downloadHandler.data);
                     savedModelPaths.Add(savePath);
-<<<<<<< HEAD
                    // Debug.Log($"Model saved to: {savePath}");
-=======
-                    Debug.Log($"Model saved to: {savePath}");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 }
                 var addModelTask = AddDownloadedModelToPrefabsAsync(savePath, go);
                 // if (go != null)
@@ -675,11 +602,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             // gltf.InstantiateMainScene(parentprefab.transform);
             await gltf.InstantiateMainSceneAsync(parentprefab.transform);
             GameObject instantiatedObject = parentprefab.transform.GetChild(parentprefab.transform.childCount - 1).gameObject;
-<<<<<<< HEAD
             model = instantiatedObject;
-=======
-
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             AddBoundingBox(instantiatedObject);
 
         }
@@ -735,15 +658,9 @@ public class ObjectSpawnerCustom : MonoBehaviour
         model.transform.parent.rotation = Quaternion.identity;
         model.transform.parent.position = Vector3.zero;
         model.transform.rotation = Quaternion.identity;
-<<<<<<< HEAD
       /*  Debug.Log(model.transform.parent.rotation);
         Debug.Log(model.transform.parent.position);
         Debug.Log(model.transform.rotation);*/
-=======
-        Debug.Log(model.transform.parent.rotation);
-        Debug.Log(model.transform.parent.position);
-        Debug.Log(model.transform.rotation);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         Renderer[] renderers = model.GetComponentsInChildren<Renderer>();
         Bounds bounds = new Bounds();
 
@@ -776,17 +693,10 @@ public class ObjectSpawnerCustom : MonoBehaviour
         model.transform.parent.position = originalParentPosition;
         model.transform.rotation = originalModelRotation;
 
-<<<<<<< HEAD
       /*  Debug.Log(model.transform.parent.rotation);
         Debug.Log(model.transform.parent.position);
         Debug.Log(model.transform.rotation);
 */
-=======
-        Debug.Log(model.transform.parent.rotation);
-        Debug.Log(model.transform.parent.position);
-        Debug.Log(model.transform.rotation);
-
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
 
     }
@@ -856,11 +766,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
-<<<<<<< HEAD
           //  Debug.Log("called get prd annotations" + url);
-=======
-            Debug.Log("called get prd annotations" + url);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
@@ -869,16 +775,10 @@ public class ObjectSpawnerCustom : MonoBehaviour
             }
             else
             {
-<<<<<<< HEAD
                // Debug.Log("Api is hit");
                 string jsonResponse = request.downloadHandler.text;
                // Debug.Log($"Response: {jsonResponse}");
 
-=======
-                Debug.Log("Api is hit");
-                string jsonResponse = request.downloadHandler.text;
-                Debug.Log($"Response: {jsonResponse}");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 ProcessAnnotations(jsonResponse);
             }
         }
@@ -889,10 +789,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
         string jsonToParse = $"{{\"items\":{jsonResponse}}}";
         AnnotationArray annotationArray = JsonUtility.FromJson<AnnotationArray>(jsonToParse);
-<<<<<<< HEAD
-
-=======
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         AnnotationsList.Clear();
         foreach (var annotation in annotationArray.items)
         {
@@ -910,7 +806,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
             //  buttonClick.onClick.AddListener(() => menuManager.SetObjectToSpawn(objectIndex));
         }
 */
-<<<<<<< HEAD
 
 
         foreach (var annotation in AnnotationsList)
@@ -943,31 +838,11 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
           
           
-=======
-        int currentIndex = 0;
-        foreach (var annotation in AnnotationsList)
-        {
-            Debug.Log(" buttons are instantiated");
-            int index = currentIndex;
-            var button = Instantiate(annotationsMenuButtonPrefabContainer, Vector3.zero, Quaternion.identity);
-            UnityEngine.UI.Button buttonClick = button.transform.GetComponent<UnityEngine.UI.Button>();
-            // buttonClick.onClick.AddListener(() => CreateAnnotationUI(currentIndex));  // menuManager.SetObjectToSpawn(objectIndex));
-            buttonClick.onClick.AddListener(() => InstantiateAnnotationPoint(index));  // menuManager.SetObjectToSpawn(objectIndex));
-            // buttonClick.onClick.AddListener(() => menuManager.SetObjectToSpawn(objectIndex));
-            button.GetComponentInChildren<TextMeshProUGUI>().text = AnnotationsList[index].title;// Annotationslist[index].title;
-            // button.GetComponent<TextMeshProUGUI>().text = "Clicked!";
-            button.transform.SetParent(uiAnnotationContent.transform, false);
-            annotationButtonList.Add(button);
-
-            Debug.Log("added call" + index);
-            Debug.Log(currentIndex);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
             currentIndex++;
         }
 
     }
 
-<<<<<<< HEAD
     public void ClearButtons()
     {
         if (annotationButtonList != null)
@@ -1025,73 +900,17 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
          }
      }*/
-=======
-
-   /* IEnumerator SpawnAndRotateObjects()
-    {
-
-        foreach (var annotation in AnnotationsList)
-        {
-            var instantiatedObject = newObject.transform.GetChild(newObject.transform.childCount - 1).gameObject;
-            newObject.transform.rotation = Quaternion.identity;
-            Vector3 transformedPoint = newObject.transform.TransformPoint(annotation.position);
-
-            GameObject obj = Instantiate(prefab, transformedPoint, newObject.transform.rotation);
-            // Debug.Log("pos " + annotation.position + "title " + annotation.title + "Desc" + annotation.description);
-            obj.transform.SetParent(newObject.transform, true);
-        }
-        *//*  foreach (var annotation in AnnotationsList)
-       {
-           GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity); // Instantiate at world origin
-           obj.transform.SetParent(newObject.transform, true); // Set the parent, false to keep local position, rotation, and scale
-           obj.transform.localPosition = annotation.position; // Now set the local position directly
-          //  obj.transform.localRotation = Quaternion.Euler(annotation.position.rotation); // If you have rotation data, apply it here
-         // Additional setup for obj based on annotation details...
-       }*//*
-
-
-
-        // foreach (Vector3 point in points)
-        foreach (Annotation annotation in AnnotationsList)
-        {
-            if (currentObject != null)
-            {
-                Destroy(currentObject);
-            }
-
-            Vector3 transformedPoint = newObject.transform.TransformPoint(annotation.position);
-            Vector3 pointdirection = transformedPoint - newObject.transform.position;
-            currentObject = Instantiate(prefab, transformedPoint, Quaternion.identity, newObject.transform);
-            Vector3 directionToCamera = Camera.main.transform.position - pointdirection; //transformedPoint; // newObject.transform.position;
-            Quaternion targetRotation = Quaternion.LookRotation(directionToCamera, Vector3.up);
-            float animationDuration = 10f;
-            float duration = 6f;
-
-            // yield return null;
-            yield return StartCoroutine(RotateObject(newObject, currentObject.transform.position, Camera.main, animationDuration));
-
-        }
-    }*/
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
 
     public void InstantiateAnnotationPoint(int currentIndex)
     {
 
         // StartCoroutine(CheckCameraPosition());
-<<<<<<< HEAD
-=======
-        Debug.Log("hello onclick InstantiateAnnotationPoint" + currentIndex);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         if (currentObject != null)
         {
             Destroy(currentObject);
         }
 
-<<<<<<< HEAD
      //   Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
-=======
-        Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         Vector3 transformedPoint = newObject.transform.TransformPoint(AnnotationsList[currentIndex].position);
         Vector3 pointdirection = transformedPoint - newObject.transform.position;
         currentObject = Instantiate(prefab, transformedPoint, Quaternion.identity, newObject.transform);
@@ -1125,7 +944,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
     IEnumerator RotateObject(GameObject obj, Vector3 buttonWorldPosition, Camera camera, float duration)
     {
-<<<<<<< HEAD
        // Debug.Log("starts to rotate" + model.name);
         Collider col = model.GetComponent<Collider>();
         ClosestPoint = col.ClosestPointOnBounds(camera.transform.position);
@@ -1142,22 +960,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
        // Debug.Log(" float Angle value : " + angle);
         rotationAxis = rotationAxis.normalized;
        // Debug.Log(rotationAxis);
-=======
-        Collider col = model.GetComponent<Collider>();
-        ClosestPoint = col.ClosestPointOnBounds(camera.transform.position);
-        Vector3 ClosestDirection = camera.transform.position - ClosestPoint;
-        annotationIndicator = Instantiate(annotationPrefab, ClosestPoint, Quaternion.identity);
-        Vector3 PointCube = buttonWorldPosition - obj.transform.position;
-        Vector3 CamCube = camera.transform.position - obj.transform.position;
-
-        Debug.Log(" PointCube " + PointCube);
-        Vector3 rotationAxis = Vector3.Cross(PointCube, CamCube);
-
-        float angle = Vector3.Angle(PointCube, CamCube);
-        Debug.Log(" float Angle value : " + angle);
-        rotationAxis = rotationAxis.normalized;
-        Debug.Log(rotationAxis);
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
         Quaternion CurrentRotation = obj.transform.rotation;
         float currentangle = Quaternion.Angle(CurrentRotation, Quaternion.identity);
         float angleDifference = angle - currentangle;
@@ -1166,7 +968,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
 
         PointCube = Quaternion.AngleAxis(angle, rotationAxis) * CamCube;
-<<<<<<< HEAD
         float rotationDuration = 7.0f; // Duration in seconds
         float elapsedTime = 0f;
         while (elapsedTime < rotationDuration)
@@ -1176,9 +977,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
             yield return null;
         }
         //  yield return StartCoroutine(StartRotation(rotationAxis, relativeRotation, obj));
-=======
-        yield return StartCoroutine(StartRotation(rotationAxis, relativeRotation, obj));
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
     }
 
     IEnumerator StartRotation(Vector3 RotationAxis, Quaternion targetWorldRotation, GameObject obj)
@@ -1207,10 +1005,6 @@ public class ObjectSpawnerCustom : MonoBehaviour
             if (Camera.main.transform.position != lastPosition || Camera.main.transform.rotation != lastRotation)
             {
                 OnCameraMove();
-<<<<<<< HEAD
-=======
-                Debug.Log(" Camera has moved ");
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
                 lastPosition = Camera.main.transform.position;
                 lastRotation = Camera.main.transform.rotation;
             }
@@ -1219,12 +1013,4 @@ public class ObjectSpawnerCustom : MonoBehaviour
         //return null;
     }
 
-<<<<<<< HEAD
 }
-=======
-
-
-}
-
-
->>>>>>> 4812ba6fe68cab86019cf29c8299fcb290364a3a
