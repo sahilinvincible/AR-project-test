@@ -414,6 +414,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         {
             if (m_ObjectSpawner.objectPrefabs.Count > objectIndex)
             {
+                m_ObjectSpawner.ClearTitleDescText();
                 m_ObjectSpawner.spawnOptionIndex = objectIndex;
                 Debug.Log(" new SPAWN OBJ index is BEING  SET " + objectIndex + " ---" +  m_ObjectSpawner.spawnOptionIndex);
             }
@@ -427,7 +428,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         HideMenu();
     }
 
-    public void SetObjectToSpawnObj3(GameObject obj)
+  /*  public void SetObjectToSpawnObj3(GameObject obj)
     {
         if (m_ObjectSpawner == null)
         {
@@ -441,7 +442,7 @@ public class ARSampleMenuManagerCustom : MonoBehaviour
         HideMenu();
        
 
-    }
+    }*/
     void ShowMenu()
     {
         annotatiosnButtonMenu.SetActive(false);

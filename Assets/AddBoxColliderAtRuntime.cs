@@ -575,7 +575,7 @@ public class AddBoxColliderAtRuntime : MonoBehaviour
         float elapsedTime = 0f;
         Quaternion StartRotation = obj.transform.rotation;
         //  obj.transform.rotation = targetWorldRotation;
-        float rotationSpeed = 1f;
+
         while (elapsedTime < rotationDuration)
         {
             obj.transform.rotation = Quaternion.Slerp(StartRotation, targetWorldRotation, (elapsedTime / rotationDuration));

@@ -745,17 +745,24 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (currentObject != null)
+        {
+            Vector3 PointCube = currentObject.transform.position - newObject.transform.position;
+            Gizmos.color = UnityEngine.Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + PointCube * 5); // scale for visibility
 
-        Vector3 pointOnCube = currentObject.transform.position; // the point on the cube's surface
-        Vector3 PointCube = (pointOnCube - transform.position);
-        Vector3 CamCube = (Camera.main.transform.position - transform.position);
+            Vector3 CamCube = Camera.main.transform.position - newObject.transform.position;
+            Gizmos.color = UnityEngine.Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + CamCube * 3); // scale for visibility
+        }
+
+        // Vector3 pointOnCube = currentObject.transform.position; // the point on the cube's surface
+        // Vector3 PointCube = (pointOnCube - transform.position);
+        // Vector3 CamCube = (Camera.main.transform.position - transform.position);
 
         // Draw the vectors
-        Gizmos.color = UnityEngine.Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + PointCube * 5); // scale for visibility
 
-        Gizmos.color = UnityEngine.Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + CamCube * 3); // scale for visibility
+       
 
         Gizmos.color = UnityEngine.Color.yellow;
         Gizmos.DrawLine(annotationIndicator.transform.position, Camera.main.transform.position);
@@ -910,7 +917,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             Destroy(currentObject);
         }
 
-     //   Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
+   //   Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
         Vector3 transformedPoint = newObject.transform.TransformPoint(AnnotationsList[currentIndex].position);
         Vector3 pointdirection = transformedPoint - newObject.transform.position;
         currentObject = Instantiate(prefab, transformedPoint, Quaternion.identity, newObject.transform);
@@ -924,6 +931,12 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
     }
 
+
+    public void ClearTitleDescText()
+    {
+        titleText.text = " ";
+        descriptionText.text = " ";
+    }
 
     public void callRotation()
     {
@@ -970,7 +983,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
         PointCube = Quaternion.AngleAxis(angle, rotationAxis) * CamCube;
         float rotationDuration = 7.0f; // Duration in seconds
         float elapsedTime = 0f;
-        while (elapsedTime < rotationDuration)
+        while (elapsedTime < rotationDuration && obj != null)
         {
             obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, relativeRotation, (elapsedTime / rotationDuration));
             elapsedTime += Time.deltaTime;
