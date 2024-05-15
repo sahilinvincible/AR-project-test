@@ -603,7 +603,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
             await gltf.InstantiateMainSceneAsync(parentprefab.transform);
             GameObject instantiatedObject = parentprefab.transform.GetChild(parentprefab.transform.childCount - 1).gameObject;
             model = instantiatedObject;
-            AddBoundingBox(instantiatedObject);
+           AddBoundingBox(instantiatedObject);
 
         }
         else
@@ -685,6 +685,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
         // Now, apply the correct bounds to the BoxCollider
         BoxCollider collider = model.AddComponent<BoxCollider>();
+        Debug.Log(newObject.transform.position + " before add");
         collider.center = bounds.center;
         collider.size = bounds.size;
 
@@ -907,7 +908,7 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
          }
      }*/
-
+    private IEnumerator rotateConst;
     public void InstantiateAnnotationPoint(int currentIndex)
     {
 
@@ -916,8 +917,12 @@ public class ObjectSpawnerCustom : MonoBehaviour
         {
             Destroy(currentObject);
         }
+        if( rotateConst != null)
+        {
+            StopCoroutine(rotateConst);
+        }
 
-   //   Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
+        //   Debug.Log("the point fetched / " + AnnotationsList[currentIndex].position);
         Vector3 transformedPoint = newObject.transform.TransformPoint(AnnotationsList[currentIndex].position);
         Vector3 pointdirection = transformedPoint - newObject.transform.position;
         currentObject = Instantiate(prefab, transformedPoint, Quaternion.identity, newObject.transform);
@@ -926,7 +931,8 @@ public class ObjectSpawnerCustom : MonoBehaviour
         float animationDuration = 6.00f;
         titleText.text = AnnotationsList[currentIndex].title;
         descriptionText.text = AnnotationsList[currentIndex].description;
-        StartCoroutine(RotateObject(newObject, currentObject.transform.position, Camera.main, animationDuration));
+        rotateConst = (RotateObject(newObject, currentObject.transform.position, Camera.main, animationDuration));
+        StartCoroutine(rotateConst);
         StartCoroutine(CheckCameraPosition());
 
     }
@@ -946,7 +952,12 @@ public class ObjectSpawnerCustom : MonoBehaviour
 
     public void OnCameraMove()
     {
-        StartCoroutine(RotateObject(newObject, currentObject.transform.position, Camera.main, 6f));
+        if (rotateConst != null)
+        {
+            StopCoroutine(rotateConst);
+        }
+        rotateConst = (RotateObject(newObject, currentObject.transform.position, Camera.main, animationDuration));
+        StartCoroutine(rotateConst);
 
     }
 
